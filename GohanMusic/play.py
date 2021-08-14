@@ -329,7 +329,7 @@ async def m_cb(b, cb):
                     callsmusic.queues.get(chat_id)["file"]
                 )
                 await cb.answer("Skipped")
-                await cb.message.edit(f"**⏭️ Melewati Lagu:** {skip[0]}\n**▶️ Sekarang Memutar Lagu:** {qeue[0][0]}")
+                await cb.message.edit(f"**⏭️ Melewati desaha:** {skip[0]}\n**▶️ Sekarang Memutar desahan:** {qeue[0][0]}")
 
     elif type_ == "leave":
         if chat_id in callsmusic.pytgcalls.active_calls:
@@ -470,7 +470,7 @@ async def play(_, message: Message):
 
         except Exception as e:
             await lel.edit(
-                "**❌ Lagu tidak ditemukan**\nCoba masukan judul lagu yang lebih jelas"
+                "**❌ Desaha tidak ditemukan**\nCoba masukan judul desaha yang lebih jelas"
             )
             print(str(e))
             return
@@ -493,16 +493,16 @@ async def play(_, message: Message):
         for i in message.command[1:]:
             query += " " + str(i)
         print(query)
-        await lel.edit("**🎵 Memproses lagu...**")
+        await lel.edit("**🎵 Memproses desaha...**")
         ydl_opts = {"format": "141/bestaudio[ext=m4a]"}
         
         try:
           results = YoutubeSearch(query, max_results=5).to_dict()
         except:
-          await lel.edit("**anda tidak memberikan judul lagu apapun !**")
-        # 𝗚𝗢𝗛𝗔𝗡 𝗠𝗨𝗦𝗜𝗖 tolol
+          await lel.edit("**anda tidak memberikan desaha apapun !**")
+        # ᴋᴀʀ ᴍᴜsɪᴄ tolol
         try:
-            toxxt = "⚡ pilih lagu yang ingin anda putar:\n\n"
+            toxxt = "⚡ pilih desaha yang ingin anda putar:\n\n"
             j = 0
             useer=user_name
             emojilist = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣"]
@@ -533,9 +533,9 @@ async def play(_, message: Message):
                 caption=toxxt, reply_markup=koyboard,
             )
             await lel.delete()
-            # 𝗚𝗢𝗛𝗔𝗡 𝗠𝗨𝗦𝗜𝗖 tolol
+            # ᴋᴀʀ ᴍᴜsɪᴄ tolol
             return
-            # 𝗚𝗢𝗛𝗔𝗡 𝗠𝗨𝗦𝗜𝗖 tolol
+            # ᴋᴀʀ ᴍᴜsɪᴄ tolol
         except:
             await lel.edit(f"**✅ Jika terjadi error jangan ragu untuk menghubungi\n• [GROUP](t.me/{SUPPORT_GROUP})\n• [OWNER](t.me/{OWNER})**")
                         
@@ -553,7 +553,7 @@ async def play(_, message: Message):
 
             except Exception as e:
                 await lel.edit(
-                "**❌ lagu tidak ditemukan.** berikan nama lagu yang valid."
+                "**❌ Desaha tidak ditemukan.** berikan nama desaha yang valid."
             )
                 print(str(e))
                 return
@@ -582,7 +582,7 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption = f"**🏷 Judul:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Antrian Ke {position}\n**🎧 Permintaan:** {message.from_user.mention}",
+            caption = f"**🏷 Judul desaha:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Antrian Ke {position}\n**🎧 Permintaan si jamet:** {message.from_user.mention}",
                    reply_markup=keyboard)
        
     else:
@@ -601,14 +601,14 @@ async def play(_, message: Message):
             return
         await message.reply_photo(
             photo="final.png",
-            caption = f"**🏷 Judul:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Memutar\n**🎧 Permintaan:** {message.from_user.mention}",
+            caption = f"**🏷 Judul:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Memutar\n**🎧 Permintaan si jamet:** {message.from_user.mention}",
                    reply_markup=keyboard)
         
         m = await client.send_photo(
             chat_id=message_.chat.id,
             reply_markup=keyboard,
             photo = "final.png",
-            caption = f"**🏷 Judul:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Memutar\n**🎧 Permintaan:** {message.from_user.mention}",
+            caption = f"**🏷 Judul:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Memutar\n**🎧 Permintaan si jamet:** {message.from_user.mention}",
         )
         os.remove("final.png")
         return await lel.delete()
@@ -622,11 +622,11 @@ async def lol_cb(b, cb):
     try:
         x,query,useer_id = typed_.split("|")      
     except:
-        await cb.message.edit("**❌ lagu tidak ditemukan**")
+        await cb.message.edit("**❌ desaha tidak ditemukan**")
         return
     useer_id = int(useer_id)
     if cb.from_user.id != useer_id:
-        await cb.answer("anda bukan orang yang meminta untuk memutar lagu ini!", show_alert=True)
+        await cb.answer("anda bukan orang yang meminta untuk memutar desaha ini!", show_alert=True)
         return
     await cb.message.edit("**🔄 Memproses...**")
     x=int(x)
@@ -647,7 +647,7 @@ async def lol_cb(b, cb):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
         if (dur / 60) > DURATION_LIMIT:
-             await cb.message.edit(f"**❌ Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!\n🎧 Lagu yang di minta berdurasi `{duration}`**")
+             await cb.message.edit(f"**❌ desaha dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!\n🎧 Lagu yang di minta berdurasi `{duration}`**")
              return
     except:
         pass
@@ -686,7 +686,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
         photo = "final.png",
-        caption = f"**🏷 Judul:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Antrian Ke {position}\n**🎧 Permintaan:** {r_by.mention}",
+        caption = f"**🏷 Judul desaha:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Antrian Ke {position}\n**🎧 Permintaan si jamet:** {r_by.mention}",
         reply_markup=keyboard,
         )
         os.remove("final.png")
@@ -705,7 +705,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
         photo = "final.png",
-        caption = f"**🏷 Judul:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Memutar\n**🎧 Permintaan:** {r_by.mention}",
+        caption = f"**🏷 Judul desaha:** [{title}]({url})\n**⏱️ Durasi:** {duration}\n**💡 Status:** Memutar\n**🎧 Permintaan si jamet:** {r_by.mention}",
         reply_markup=keyboard,
         )
         os.remove("final.png")
