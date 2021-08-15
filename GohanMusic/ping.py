@@ -59,7 +59,7 @@ async def ping_pong(client: Client, m: Message):
     m_reply = await m.reply_text("Pinging...")
     delta_ping = time() - start
     await m_reply.edit_text(
-        f"{emoji.PING_PONG} **PONG!!**\n"
+        f"{emoji.KON-TOL} **TOL!!**\n"
         f"`{delta_ping * 1000:.3f} ms`"
     )
 
