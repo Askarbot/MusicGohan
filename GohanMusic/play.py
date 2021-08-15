@@ -339,14 +339,14 @@ async def m_cb(b, cb):
                 pass
 
             callsmusic.pytgcalls.leave_group_call(chat_id)
-            await cb.message.edit("**✅ Userbot telah terputus dari obrolan suara.**")
+            await cb.message.edit("**✅ Turuh dulu cape blokk.**")
         else:
             await cb.answer("Assistant Sedang Tidak Terhubung dengan VCG!", show_alert=True)
 
 @Client.on_message(command(["play", f"play@{bu}"]) & other_filters)
 async def play(_, message: Message):
     global que
-    lel = await message.reply("**🔄 Memproses...**")
+    lel = await message.reply("**🔄 Memproses desahan...**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
     try:
@@ -370,7 +370,7 @@ async def play(_, message: Message):
                     invitelink = await _.export_chat_invite_link(chid)
                 except:
                     await lel.edit(
-                        "<b>jadikan saya sebagai admin terlebih dahulu.</b>",
+                        "<b>jadikan saya sebagai admin terlebih dahulu blokk.</b>",
                     )
                     return
 
@@ -502,7 +502,7 @@ async def play(_, message: Message):
           await lel.edit("**anda tidak memberikan judul desaha apapun !**")
         # ᴋᴀʀ ᴍᴜsɪᴄ tolol
         try:
-            toxxt = "⚡ pilih desahan yang ingin anda putar:\n\n"
+            toxxt = "⚡ pilih desahan yang ingin anda putar ⚡:\n\n"
             j = 0
             useer=user_name
             emojilist = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣"]
