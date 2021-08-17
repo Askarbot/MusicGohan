@@ -118,8 +118,8 @@ def updated_stats(chat, queue, vol=100):
         if len(que) > 0:
             stats += "\n\n"
             stats += "Volume: {}%\n".format(vol)
-            stats += "desahan Dalam Antrian: `{}`\n".format(len(que))
-            stats += "Sedang Memutar desahan: **{}**\n".format(queue[0][0])
+            stats += "lagu Dalam Antrian: `{}`\n".format(len(que))
+            stats += "Sedang Memutar lagu: **{}**\n".format(queue[0][0])
             stats += "Permintaan si jamet: {}".format(queue[0][1].mention)
     else:
         stats = None
@@ -186,19 +186,19 @@ async def p_cb(b, cb):
     if type_ == "playlist":           
         queue = que.get(cb.message.chat.id)
         if not queue:   
-            await cb.message.edit("**Sedang Tidak Memutar desahan!**")
+            await cb.message.edit("**Sedang Tidak Memutar lagu!**")
         temp = []
         for t in queue:
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "**desahan Yang Sedang Dimainkan** di {}".format(cb.message.chat.title)
+        msg = "**lagu Yang Sedang Dimainkan** di {}".format(cb.message.chat.title)
         msg += "\n• "+ now_playing
         msg += "\n• Permintaan "+by
         temp.pop(0)
         if temp:
              msg += "\n\n"
-             msg += "**Antrian desahan**"
+             msg += "**Antrian lagu**"
              for song in temp:
                  name = song[0]
                  usr = song[1].mention(style="md")
@@ -245,13 +245,13 @@ async def m_cb(b, cb):
     elif type_ == "playlist":
         queue = que.get(cb.message.chat.id)
         if not queue:   
-            await cb.message.edit("Sedang Tidak Memutar desahan")
+            await cb.message.edit("Sedang Tidak Memutar lagu")
         temp = []
         for t in queue:
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "**Desahan Yang Sedang Dimainkan** di {}".format(cb.message.chat.title)
+        msg = "**Lagu Yang Sedang Dimainkan** di {}".format(cb.message.chat.title)
         msg += "\n• "+ now_playing
         msg += "\n• Permintaan "+by
         temp.pop(0)
@@ -274,7 +274,7 @@ async def m_cb(b, cb):
                 await cb.answer("Obrolan tidak terhubung atau sudah dimainkan", show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chat_id)
-            await cb.answer("Desahan Resumed!")
+            await cb.answer("Lagu Resumed!")
      
     elif type_ == "puse":         
         if (
@@ -286,7 +286,7 @@ async def m_cb(b, cb):
         else:
             callsmusic.pytgcalls.pause_stream(chat_id)
             
-            await cb.answer("Desahan Paused!")
+            await cb.answer("Lagu Paused!")
 
     elif type_ == "cls":          
         await cb.answer("Closed menu")
@@ -329,7 +329,7 @@ async def m_cb(b, cb):
                     callsmusic.queues.get(chat_id)["file"]
                 )
                 await cb.answer("Skipped")
-                await cb.message.edit(f"**⏭️ Melewati desahan:** {skip[0]}\n**▶️ Sekarang Memutar desahan:** {qeue[0][0]}")
+                await cb.message.edit(f"**⏭️ Melewati lagu:** {skip[0]}\n**▶️ Sekarang Memutar lagu:** {qeue[0][0]}")
 
     elif type_ == "leave":
         if chat_id in callsmusic.pytgcalls.active_calls:
@@ -339,14 +339,14 @@ async def m_cb(b, cb):
                 pass
 
             callsmusic.pytgcalls.leave_group_call(chat_id)
-            await cb.message.edit("**✅ Turuh dulu cape blokk.**")
+            await cb.message.edit("**✅ Turuh dulu cape blokk!**")
         else:
             await cb.answer("Assistant Sedang Tidak Terhubung dengan VCG!", show_alert=True)
 
 @Client.on_message(command(["play", f"play@{bu}"]) & other_filters)
 async def play(_, message: Message):
     global que
-    lel = await message.reply("**🔄 Memproses desahan...**")
+    lel = await message.reply("**🔄 Memproses lagu...**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
     try:
@@ -400,7 +400,7 @@ async def play(_, message: Message):
         )
         return
     text_links=None
-    await lel.edit("**🔎 Menemukan desahan...**")
+    await lel.edit("**🔎 Menemukan lagu...**")
     if message.reply_to_message:
         entities = []
         toxt = message.reply_to_message.text or message.reply_to_message.caption
@@ -453,7 +453,7 @@ async def play(_, message: Message):
         )
     elif urls:
         query = toxt
-        await lel.edit("**🎵 Memproses desahan...**")
+        await lel.edit("**🎵 Memproses lagu...**")
         ydl_opts = {"format": "141/bestaudio[ext=m4a]"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
@@ -470,7 +470,7 @@ async def play(_, message: Message):
 
         except Exception as e:
             await lel.edit(
-                "**❌ Desahan tidak ditemukan**\nCoba masukan judul desaha yang jelas goblok"
+                "**❌ Lagu tidak ditemukan**\nCoba masukan judul lagu yang jelas goblok"
             )
             print(str(e))
             return
@@ -493,7 +493,7 @@ async def play(_, message: Message):
         for i in message.command[1:]:
             query += " " + str(i)
         print(query)
-        await lel.edit("**🎵 Memproses desahan...**")
+        await lel.edit("**🎵 Memproses lagu...**")
         ydl_opts = {"format": "141/bestaudio[ext=m4a]"}
         
         try:
@@ -502,7 +502,7 @@ async def play(_, message: Message):
           await lel.edit("**anda tidak memberikan judul desaha apapun !**")
         # ᴋᴀʀ ᴍᴜsɪᴄ tolol
         try:
-            toxxt = "⚡ pilih desahan yang ingin anda putar ⚡:\n\n"
+            toxxt = "⚡ pilih sendiri ni blok ⚡:\n\n"
             j = 0
             useer=user_name
             emojilist = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣"]
@@ -553,7 +553,7 @@ async def play(_, message: Message):
 
             except Exception as e:
                 await lel.edit(
-                "**❌ Desahan tidak ditemukan.** berikan nama desahan yang valid."
+                "**❌ Lagu tidak ditemukan.** berikan nama lagu yang valid."
             )
                 print(str(e))
                 return
@@ -622,13 +622,13 @@ async def lol_cb(b, cb):
     try:
         x,query,useer_id = typed_.split("|")      
     except:
-        await cb.message.edit("**❌ Desahan tidak ditemukan**")
+        await cb.message.edit("**❌ lagu tidak ditemukan**")
         return
     useer_id = int(useer_id)
     if cb.from_user.id != useer_id:
         await cb.answer("anda bukan orang yang meminta untuk memutar desahan ini!", show_alert=True)
         return
-    await cb.message.edit("**🔄 Memproses desahan...**")
+    await cb.message.edit("**🔄 Memproses lagu...**")
     x=int(x)
     try:
         useer_name = cb.message.reply_to_message.from_user.first_name
@@ -647,7 +647,7 @@ async def lol_cb(b, cb):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
         if (dur / 60) > DURATION_LIMIT:
-             await cb.message.edit(f"**❌ Desahan dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!\n🎧 desahan yang di minta berdurasi `{duration}`**")
+             await cb.message.edit(f"**❌ lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!\n🎧 lagu yang di minta berdurasi `{duration}`**")
              return
     except:
         pass
